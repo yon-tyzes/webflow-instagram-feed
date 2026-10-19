@@ -1,0 +1,21 @@
+name: Idea
+description: Suggest a feature, a site builder guide, or another improvement.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What do you propose?
+    validations:
+      required: true
+  - type: textarea
+    id: general
+    attributes:
+      label: Would this help most sites, or mainly yours?
+      description: Site-specific needs can often be met with your own markup and the optional attributes.

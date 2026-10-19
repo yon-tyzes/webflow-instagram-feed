@@ -1,0 +1,15 @@
+# Secrets: never commit tokens. Use GitHub repository secrets instead.
+.env
+.env.*
+*.token
+token.txt
+
+# Dependencies and logs
+node_modules/
+*.log
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

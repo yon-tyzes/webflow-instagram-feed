@@ -1,0 +1,9 @@
+<!--
+  Paste inside the <head> of the page with the feed.
+  Webflow: Page settings > Custom code > Inside <head> tag.
+  Hides the placeholder cards until real posts load. Their space stays
+  reserved, so the layout does not jump.
+-->
+<style>
+  [data-ig-feed]:not([data-ig-ready]) > * { visibility: hidden; }
+</style>

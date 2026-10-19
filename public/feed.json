@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "sample": true,
+  "username": "your_org",
+  "profile_url": "https://www.instagram.com/",
+  "updated_at": "2026-10-19T00:00:00Z",
+  "posts": [
+    {
+      "id": "sample-1",
+      "shortcode": null,
+      "type": "image",
+      "featured": true,
+      "image": "images/sample-1.svg",
+      "alt": "Sample post 1 placeholder image",
+      "caption": "Pinned: our fall volunteer day is set. Sign up through the link in bio.",
+      "caption_short": "Pinned: our fall volunteer day is set. Sign up through the link in bio.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-17T15:00:00+0000"
+    },
+    {
+      "id": "sample-2",
+      "shortcode": null,
+      "type": "image",
+      "featured": false,
+      "image": "images/sample-2.svg",
+      "alt": "Sample post 2 placeholder image",
+      "caption": "Thank you to everyone who came out Saturday. 140 bags packed in two hours.",
+      "caption_short": "Thank you to everyone who came out Saturday. 140 bags packed in two hours.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-16T15:00:00+0000"
+    },
+    {
+      "id": "sample-3",
+      "shortcode": null,
+      "type": "video",
+      "featured": false,
+      "image": "images/sample-3.svg",
+      "alt": "Sample post 3 placeholder image",
+      "caption": "Behind the scenes at this week's youth workshop.",
+      "caption_short": "Behind the scenes at this week's youth workshop.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-15T15:00:00+0000"
+    },
+    {
+      "id": "sample-4",
+      "shortcode": null,
+      "type": "image",
+      "featured": false,
+      "image": "images/sample-4.svg",
+      "alt": "Sample post 4 placeholder image",
+      "caption": "Meet Dana, who has led our Tuesday program since 2021.",
+      "caption_short": "Meet Dana, who has led our Tuesday program since 2021.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-14T15:00:00+0000"
+    },
+    {
+      "id": "sample-5",
+      "shortcode": null,
+      "type": "carousel",
+      "featured": false,
+      "image": "images/sample-5.svg",
+      "alt": "Sample post 5 placeholder image",
+      "caption": "Five photos from the community garden harvest.",
+      "caption_short": "Five photos from the community garden harvest.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-13T15:00:00+0000"
+    },
+    {
+      "id": "sample-6",
+      "shortcode": null,
+      "type": "image",
+      "featured": false,
+      "image": "images/sample-6.svg",
+      "alt": "Sample post 6 placeholder image",
+      "caption": "New hours start Monday: open until 7pm on weekdays.",
+      "caption_short": "New hours start Monday: open until 7pm on weekdays.",
+      "permalink": "https://www.instagram.com/",
+      "timestamp": "2026-10-12T15:00:00+0000"
+    }
+  ]
+}

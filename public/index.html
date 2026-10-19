@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feed preview</title>
+<style>
+  :root { --text:#1d1d1b; --muted:#6b6b66; --bg:#fafaf7; --card:#fff; --line:#e4e2dc; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text:#f1f0ec; --muted:#a8a69f; --bg:#161615; --card:#1f1f1d; --line:#33322f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .container { max-width:1120px; margin:0 auto; padding:64px 16px; }
+  .head { display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:24px; }
+  h1 { font-size:28px; margin:0; }
+  .follow { color:var(--text); font-weight:600; }
+  .note { color:var(--muted); font-size:14px; margin:0 0 32px; }
+  .note a { color:inherit; }
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  @media (max-width:767px) { .grid { grid-template-columns:repeat(2, 1fr); gap:8px; } }
+  .card { position:relative; display:block; color:inherit; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .card:focus-visible { outline:3px solid #2f6fdb; outline-offset:2px; }
+  .card img { display:block; width:100%; aspect-ratio:3/4; object-fit:cover; }
+  .badges { position:absolute; top:8px; right:8px; display:flex; gap:6px; }
+  .badge { background:rgba(0,0,0,.6); color:#fff; font-size:12px; padding:2px 8px; border-radius:99px; }
+  .body { padding:12px; }
+  .caption { margin:0; font-size:14px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .date { color:var(--muted); font-size:13px; margin-top:4px; }
+  [data-ig-feed]:not([data-ig-ready]) > * { visibility:hidden; }
+</style>
+</head>
+<body>
+<section data-ig-section>
+  <div class="container">
+    <div class="head">
+      <h1>Latest from <span data-ig-handle>Instagram</span></h1>
+      <a class="follow" data-ig-follow href="https://www.instagram.com/">Follow us on Instagram</a>
+    </div>
+    <p class="note">Preview of this feed. Your site uses <a href="feed.json">feed.json</a> and <a href="ig-feed.js">ig-feed.js</a> from this address, inside a layout you design.</p>
+
+    <div class="grid" data-ig-feed="feed.json" data-ig-limit="6">
+      <a class="card" data-ig-card href="#">
+        <img data-ig-image src="images/sample-1.svg" alt="">
+        <div class="badges">
+          <span class="badge" data-ig-featured>Pinned</span>
+          <span class="badge" data-ig-video>Reel</span>
+          <span class="badge" data-ig-carousel>Album</span>
+        </div>
+        <div class="body">
+          <p class="caption" data-ig-caption>Caption</p>
+          <div class="date" data-ig-date>Date</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="ig-feed.js" defer></script>
+</body>
+</html>

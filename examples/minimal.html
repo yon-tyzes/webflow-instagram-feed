@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimal feed example</title>
+  <style>
+    [data-ig-feed]:not([data-ig-ready]) > * { visibility: hidden; }
+    .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 40px auto; padding: 0 16px; }
+    .ig-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <!-- Six cards, filled in order. Each card is a link with one image. -->
+  <div class="ig-grid" data-ig-feed="https://YOUR-USER.github.io/YOUR-REPO/feed.json">
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+    <a href="#"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></a>
+  </div>
+  <script src="https://YOUR-USER.github.io/YOUR-REPO/ig-feed.js" defer></script>
+</body>
+</html>

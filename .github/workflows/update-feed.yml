@@ -1,0 +1,111 @@
+name: Update feed
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"   # check for new posts every 6 hours
+    - cron: "41 7 * * 1"     # Mondays: also refresh the token
+  workflow_dispatch:
+    inputs:
+      refresh_token:
+        description: "Also refresh the Instagram token now"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - "feed.config.json"
+      - "public/**"
+      - "scripts/**"
+      - ".github/workflows/update-feed.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update-feed
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      # Scheduled runs do nothing until a token is added. This keeps the
+      # template repository and fresh copies quiet.
+      - name: Check setup
+        id: setup
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          if [ -n "$IG_ACCESS_TOKEN" ]; then
+            echo "has_token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_token=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No IG_ACCESS_TOKEN secret yet. Publishing the sample feed. See docs/setup-instagram.md."
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.setup.outputs.has_token == 'true' || github.event_name != 'schedule'
+
+      - uses: actions/setup-node@v7
+        if: steps.setup.outputs.has_token == 'true' || github.event_name != 'schedule'
+        with:
+          node-version: 22
+
+      - name: Refresh token
+        if: steps.setup.outputs.has_token == 'true' && (github.event.schedule == '41 7 * * 1' || inputs.refresh_token)
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          NEW_TOKEN_FILE: ${{ runner.temp }}/ig_token
+        run: |
+          node scripts/refresh-token.mjs
+          if [ -s "$NEW_TOKEN_FILE" ]; then
+            if [ "$(cat "$NEW_TOKEN_FILE")" != "$IG_ACCESS_TOKEN" ]; then
+              if [ -n "$GH_PAT" ]; then
+                GH_TOKEN="$GH_PAT" gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" < "$NEW_TOKEN_FILE"
+                echo "Saved the refreshed token to the IG_ACCESS_TOKEN secret."
+              else
+                echo "::warning::Instagram issued a new token but GH_PAT is not set, so it could not be saved. Add GH_PAT (docs/setup-github.md) or the feed stops in about 60 days."
+              fi
+              echo "IG_TOKEN_OVERRIDE=$(cat "$NEW_TOKEN_FILE")" >> "$GITHUB_ENV"
+            fi
+            rm -f "$NEW_TOKEN_FILE"
+          fi
+          # Weekly heartbeat commit. GitHub pauses scheduled workflows in
+          # repositories with no activity for 60 days.
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > public/last-refresh.txt
+
+      - name: Fetch posts
+        if: steps.setup.outputs.has_token == 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ env.IG_TOKEN_OVERRIDE || secrets.IG_ACCESS_TOKEN }}
+        run: node scripts/fetch-feed.mjs
+
+      - name: Commit changes
+        if: steps.setup.outputs.has_token == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "Update feed"
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - uses: actions/configure-pages@v6
+        if: steps.setup.outputs.has_token == 'true' || github.event_name != 'schedule'
+      - uses: actions/upload-pages-artifact@v5
+        if: steps.setup.outputs.has_token == 'true' || github.event_name != 'schedule'
+        with:
+          path: public
+      - id: deploy
+        uses: actions/deploy-pages@v5
+        if: steps.setup.outputs.has_token == 'true' || github.event_name != 'schedule'

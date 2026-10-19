@@ -1,0 +1,19 @@
+{
+  "name": "webflow-instagram-feed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Show your latest Instagram posts on a Webflow site, or any site, in a layout you design. Free, self-hosted on GitHub Pages.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Yonatan Tsige",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "fetch": "node scripts/fetch-feed.mjs",
+    "refresh-token": "node scripts/refresh-token.mjs",
+    "check": "node --check scripts/lib.mjs && node --check scripts/fetch-feed.mjs && node --check scripts/refresh-token.mjs && node --check public/ig-feed.js && node scripts/validate.mjs",
+    "test": "bash test/run.sh",
+    "preview": "python3 -m http.server 8000 --directory public"
+  }
+}

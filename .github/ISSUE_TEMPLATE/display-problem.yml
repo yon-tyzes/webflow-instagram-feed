@@ -1,0 +1,37 @@
+name: Display problem
+description: The feed loads, but your site shows it wrong.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [Troubleshooting](../blob/main/docs/troubleshooting.md) first.
+  - type: input
+    id: builder
+    attributes:
+      label: Site builder
+      placeholder: Webflow, plain HTML, ...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you expected and what you see
+      description: A screenshot helps.
+    validations:
+      required: true
+  - type: textarea
+    id: markup
+    attributes:
+      label: The HTML of your grid and one card
+      description: In your browser, right-click the grid, choose Inspect, then copy the element.
+      render: html
+  - type: textarea
+    id: console
+    attributes:
+      label: Browser console messages starting with [ig-feed]
+      render: text
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
