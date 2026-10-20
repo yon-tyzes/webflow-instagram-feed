@@ -65,7 +65,7 @@
     "color:#fff;color:var(--ig-play-color,#fff);" +
     "-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);pointer-events:none;" +
     "-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);transition:transform 0.2s ease}" +
-    ".ig-feed-play-icon{display:block;width:44%;height:44%;margin-left:8%;fill:currentColor}" +
+    ".ig-feed-play-icon{display:block;width:44%;height:44%;fill:currentColor}" +
     ":where(a:hover,a:focus-visible,.is-video:hover) .ig-feed-play{transform:translate(-50%,-50%) scale(1.08)}" +
     "@media (prefers-reduced-motion:reduce){.ig-feed-play{transition:none}" +
     ":where(a:hover,a:focus-visible,.is-video:hover) .ig-feed-play{transform:translate(-50%,-50%)}}";

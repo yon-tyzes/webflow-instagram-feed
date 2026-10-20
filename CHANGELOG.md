@@ -6,6 +6,12 @@ Changes that rename or remove fields in `feed.json` or `feed.config.json`, or at
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-19
+
+### Fixed
+
+- Play button icon is now centered in its circle.
+
 ## [1.1.0] - 2026-10-19
 
 ### Added
@@ -39,6 +45,7 @@ Changes that rename or remove fields in `feed.json` or `feed.config.json`, or at
 - Configuration and feed validation, an end-to-end test against a mock Instagram API, and continuous integration.
 - Setup guides for GitHub, Instagram, and websites, plus configuration and troubleshooting references.
 
-[Unreleased]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/yon-tyzes/webflow-instagram-feed/releases/tag/v1.0.0
