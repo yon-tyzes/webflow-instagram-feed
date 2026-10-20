@@ -21,10 +21,12 @@
   @media (max-width:767px) { .grid { grid-template-columns:repeat(2, 1fr); gap:8px; } }
   .card { position:relative; display:block; color:inherit; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
   .card:focus-visible { outline:3px solid #2f6fdb; outline-offset:2px; }
-  .card img { display:block; width:100%; aspect-ratio:3/4; object-fit:cover; }
+  .media { aspect-ratio:3/4; }
+  .card img { display:block; width:100%; height:100%; object-fit:cover; }
   .badges { position:absolute; top:8px; right:8px; display:flex; gap:6px; }
   .badge { background:rgba(0,0,0,.6); color:#fff; font-size:12px; padding:2px 8px; border-radius:99px; }
   .body { padding:12px; }
+  .handle { color:var(--muted); font-size:13px; font-weight:600; margin-bottom:4px; }
   .caption { margin:0; font-size:14px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .date { color:var(--muted); font-size:13px; margin-top:4px; }
   [data-ig-feed]:not([data-ig-ready]) > * { visibility:hidden; }
@@ -41,14 +43,16 @@
 
     <div class="grid" data-ig-feed="feed.json" data-ig-limit="6">
       <a class="card" data-ig-card href="#">
-        <img data-ig-image src="images/sample-1.svg" alt="">
+        <div class="media">
+          <img data-ig-image src="images/sample-1.svg" alt="">
+        </div>
         <div class="badges">
           <span class="badge" data-ig-featured>Pinned</span>
-          <span class="badge" data-ig-video>Reel</span>
           <span class="badge" data-ig-carousel>Album</span>
         </div>
         <div class="body">
-          <p class="caption" data-ig-caption>Caption</p>
+          <div class="handle" data-ig-handle>@handle</div>
+          <p class="caption" data-ig-caption="clean">Caption</p>
           <div class="date" data-ig-date>Date</div>
         </div>
       </a>

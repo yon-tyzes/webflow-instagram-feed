@@ -39,7 +39,7 @@ Section                     data-ig-section = true   (optional)
       ...                   up to card 6
 ```
 
-Style the cards however you like. The script doesn't add or change your classes, apart from the optional [combo classes](#style-featured-posts-and-reels).
+Style the cards however you like. The script doesn't add or change your classes, apart from the optional [combo classes](#style-featured-posts-and-reels). On video cards it adds a [play button](#play-button-on-videos) over the image.
 
 ### 2. Add the attribute
 
@@ -53,7 +53,7 @@ Optional: select the whole section and add `data-ig-section` with the value `tru
 
 Instagram photos come in different shapes, so let the wrapper set the shape:
 
-- **Image wrapper:** an aspect ratio (1:1 for squares, or 3:4 to match the Instagram profile grid), and **Overflow: Hidden** if it has rounded corners.
+- **Image wrapper:** an aspect ratio (1:1 for squares, or 3:4 to match the Instagram profile grid), and **Overflow: Hidden** if it has rounded corners. The [play button](#play-button-on-videos) is centered in this wrapper.
 - **Image:** **Width 100%**, **Height 100%**, and **Fit: Cover** (under **Size > More size options**).
 
 ### 4. Add the custom code
@@ -66,6 +66,17 @@ Instagram photos come in different shapes, so let the wrapper set the shape:
 ### 5. Publish
 
 Custom code runs on the staged and published site, not in the Designer. Publish, open the page, and you should see the sample posts in your design.
+
+### Add captions and the handle
+
+Captions and the `@handle` are optional text inside each card.
+
+1. Inside the card, below the image wrapper, add a **Text Block** for the handle. Under **Element settings > Custom attributes**, add `data-ig-handle` with the value `true`.
+2. Add a second **Text Block** for the caption. Add the attribute `data-ig-caption` with the value `clean`. Clean captions leave out links and hashtags. See [Captions](#captions) for the other modes.
+3. Select the caption Text Block and set **Typography > Line clamp** to 2 or 3 lines, so long captions end neatly with "…" and every card stays the same height.
+4. Publish. The placeholder text in both blocks is replaced on the live page.
+
+If you built every card by hand, add the same two Text Blocks with the same attributes to each card. A quick way is to finish one card, delete the others, and duplicate the finished one. If you built one card, the copies get them automatically.
 
 ### Links outside the grid
 
@@ -88,10 +99,11 @@ Add these under **Element settings > Custom attributes** in Webflow, or as HTML 
 | `data-ig-card` | Each card | Only needed if the grid holds other elements too. Then only marked elements are cards. |
 | `data-ig-image` | An image in the card | Only needed if a card has more than one image. |
 | `data-ig-link` | A link in the card | Only needed if the card isn't a link and has more than one link. |
-| `data-ig-caption` | A text element in the card | Shows the caption, cut at about 140 characters. |
+| `data-ig-caption` | A text element in the card | Shows the caption, cut at about 140 characters. Value `short`, `full`, or `clean` sets the [caption mode](#captions) for this element. |
+| `data-ig-caption-length` | The caption element | Length in characters for `clean` and `short` captions on this element. |
 | `data-ig-date` | A text element in the card | Shows the post date, like "Oct 12". |
 | `data-ig-featured` | A badge in the card | Shown only on featured posts. |
-| `data-ig-video` | An icon in the card | Shown only on Reels and videos. |
+| `data-ig-video` | An icon in the card | Shown only on Reels and videos. Replaces the built-in [play button](#play-button-on-videos) on that card. |
 | `data-ig-carousel` | An icon in the card | Shown only on multi-photo posts. |
 | `data-ig-follow` | Any link on the page | Gets your profile address. |
 | `data-ig-handle` | Any text on the page | Becomes your `@handle`. |
@@ -101,7 +113,55 @@ Options on the `data-ig-feed` element:
 | Attribute | Value | Default |
 | --- | --- | --- |
 | `data-ig-limit` | Number of cards when you build one card | `6` |
-| `data-ig-caption` | `full` to show the whole caption | short caption |
+| `data-ig-caption` | `short`, `full`, or `clean`. See [Captions](#captions). | `short` |
+| `data-ig-caption-length` | Caption length in characters for `clean` and `short` | `140` |
+| `data-ig-play` | `none` to turn off the built-in play button | play button on |
+
+## Captions
+
+There are three caption modes:
+
+| Mode | Shows |
+| --- | --- |
+| `short` | The caption cut at about 140 characters, as written. This is the default. |
+| `full` | The whole caption, as written. |
+| `clean` | The caption without links and hashtags, cut at a word boundary with "…". The block of hashtags and mentions at the end is removed too. Emoji and @mentions inside sentences stay. |
+
+`data-ig-caption-length` changes where `short` and `clean` captions are cut. It has no effect on `full`.
+
+You can set the mode and length on the caption element itself, or on the `data-ig-feed` element for all cards. The script uses the first of these it finds:
+
+1. The caption element's own `data-ig-caption` value, if it is `short`, `full`, or `clean`. Any other value, like `true`, is skipped.
+2. The `data-ig-feed` element's `data-ig-caption` value.
+3. `short`.
+
+`data-ig-caption-length` works the same way: the caption element first, then the `data-ig-feed` element, then 140.
+
+On Webflow, setting the mode on the caption Text Block is usually easiest, because that is the element you are already editing.
+
+If a caption ends up empty (for example a post with only hashtags in `clean` mode), the caption element is hidden.
+
+## Play button on videos
+
+Reel and video cards get a round play button centered over the image, so visitors know the post is a video before they click. Clicks pass through it to the card link.
+
+- **When it appears:** on video posts, in cards that have no element with `data-ig-video`. If a card has a `data-ig-video` element, that element is shown instead and no play button is added.
+- **Where it goes:** inside the image's parent element (the image wrapper), centered. If the wrapper has no position set, the script sets it to `position: relative` so the button stays inside. It changes no other styles on your elements.
+- **Turn it off:** add `data-ig-play` with the value `none` to the `data-ig-feed` element.
+
+Restyle it with CSS variables. Set them on the grid, a card, or `body`, in your own CSS or in Webflow's custom code:
+
+| Variable | Default |
+| --- | --- |
+| `--ig-play-size` | `56px` |
+| `--ig-play-bg` | `rgba(0, 0, 0, 0.55)` |
+| `--ig-play-color` | `#fff` |
+
+```css
+.your-grid { --ig-play-size: 44px; --ig-play-bg: rgba(255, 255, 255, 0.8); --ig-play-color: #111; }
+```
+
+The button grows slightly when the card is hovered or focused, except for visitors who ask for reduced motion. For larger changes, style the `.ig-feed-play` class. The script's own styles use single class selectors, so your CSS wins.
 
 ## Style featured posts and Reels
 
@@ -113,11 +173,13 @@ The script adds these classes to filled cards:
 
 In Webflow, add a combo class with the exact same name to one card and style it. You can leave it on that card: on the live page the script adds the class to the right cards and removes it from the others. Keeping it applied also stops Webflow's **Clean up** from deleting the style as unused.
 
-A small play icon on Reel cards is worth adding. Without it, visitors expect a photo and land on a video.
+Reel cards get a [play button](#play-button-on-videos) automatically. To use your own icon instead, add it to the card with `data-ig-video`.
 
 ## Accessibility
 
 - Each photo's alt text comes from the alt text set on Instagram. If there is none, it uses the first sentence of the caption. If the caption is empty too, it says "Instagram post from @handle". Writing alt text on Instagram gives the best result.
-- Each card link includes hidden text, "opens Instagram in a new tab", for screen reader users.
+- When a card shows the caption and the alt text is the caption's first sentence, the image gets empty alt text (`alt=""`). The visible caption already describes the post, so screen readers don't read it twice. Alt text written on Instagram, and "Instagram post from @handle", are always kept.
+- Each card link includes hidden text, "opens Instagram in a new tab", for screen reader users. On videos it says "video, opens Instagram in a new tab".
+- The play button is hidden from screen readers (`aria-hidden="true"`), since the link text already says the post is a video.
 - Give your cards a visible focus style so keyboard users can see where they are.
 - Captions and other post text are inserted as plain text, never as HTML.

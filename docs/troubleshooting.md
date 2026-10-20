@@ -25,6 +25,8 @@ GitHub emails you when the workflow fails. Open the **Actions** tab, click the f
 | Photos stretched or not filling the box | Set the image to width 100%, height 100%, fit cover, and give its wrapper an aspect ratio. See [Size the images](setup-website.md#3-size-the-images). |
 | Sample posts still showing after adding the token | Run the workflow by hand. Browsers and GitHub Pages cache feed.json for up to 10 minutes. |
 | Hover effects stopped working | Build every card in the Designer rather than one card. See [How the script finds things](setup-website.md#how-the-script-finds-things). |
+| Play button is not centered on the photo | The button centers in the image's parent element. Wrap the image in its own Div (the image wrapper), so the wrapper is the same size as the photo. |
+| Play button shows but you want your own icon | Add your icon to the card with `data-ig-video`, or turn the button off with `data-ig-play="none"` on the `data-ig-feed` element. |
 | The wrong elements are filled | The grid has elements besides cards. Add `data-ig-card` to each card. |
 
 The browser console shows messages that start with `[ig-feed]` when something goes wrong.

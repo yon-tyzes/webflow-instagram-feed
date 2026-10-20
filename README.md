@@ -27,6 +27,8 @@ This project keeps the feed in a GitHub repository you own. You design the cards
 ## What you get
 
 - **Your design.** Build the cards in the Webflow Designer (or your own HTML) with your classes and breakpoints. Interactions on the cards keep working.
+- **Videos look like videos.** Reels get a play button over the image automatically. Restyle it with CSS variables, or use your own icon.
+- **Clean captions.** Show captions without links and hashtags, cut neatly at a word boundary.
 - **Featured posts first.** Pick up to 3 posts to lead the grid, then the latest posts fill the rest, 6 by default.
 - **Images that don't break.** Photos are downloaded into the repository and served from GitHub Pages.
 - **No upkeep after setup.** New posts appear within 6 hours. The Instagram token renews itself every week.
@@ -61,7 +63,7 @@ Add one attribute to the element that holds your cards, then two snippets of cus
 <script src="https://YOUR-USER.github.io/YOUR-REPO/ig-feed.js" defer></script>
 ```
 
-Each card gets a post's photo, alt text, and link, in order. On Webflow you add `data-ig-feed` under **Element settings > Custom attributes** on your grid. Optional attributes add captions, dates, and badges for featured posts or Reels. The full reference is in [Set up your website](docs/setup-website.md).
+Each card gets a post's photo, alt text, and link, in order. On Webflow you add `data-ig-feed` under **Element settings > Custom attributes** on your grid. Optional attributes add captions (including a clean mode without links and hashtags), the handle, dates, and badges for featured posts. The full reference is in [Set up your website](docs/setup-website.md).
 
 ## Choose featured posts
 

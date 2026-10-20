@@ -1,6 +1,6 @@
 {
   "name": "webflow-instagram-feed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Show your latest Instagram posts on a Webflow site, or any site, in a layout you design. Free, self-hosted on GitHub Pages.",
   "type": "module",

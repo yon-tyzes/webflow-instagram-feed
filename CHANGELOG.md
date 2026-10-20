@@ -6,6 +6,23 @@ Changes that rename or remove fields in `feed.json` or `feed.config.json`, or at
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-19
+
+### Added
+
+- Built-in play button on video and Reel cards that have no `data-ig-video` element. It sits centered over the image, lets clicks through to the card link, and is hidden from screen readers.
+- CSS variables `--ig-play-size`, `--ig-play-bg`, and `--ig-play-color` to restyle the play button, and `data-ig-play="none"` on the `data-ig-feed` element to turn it off.
+- `clean` caption mode: the caption without links, hashtags, or the trailing block of hashtags and mentions, cut at a word boundary. Emoji and @mentions inside sentences stay.
+- `data-ig-caption-length` to set where `clean` and `short` captions are cut (default 140).
+- Caption mode and length can be set on the caption element itself, which takes priority over the `data-ig-feed` element.
+- Webflow walkthrough for adding captions and the handle to cards, and new troubleshooting entries for the play button.
+
+### Changed
+
+- When a card shows the caption and the image's alt text is the caption's first sentence, the image gets empty alt text so screen readers don't read the same text twice. Alt text written on Instagram is kept.
+- The hidden link text on video cards now says "video, opens Instagram in a new tab".
+- The preview page uses the built-in play button, a handle line, and clean captions. The sample feed has realistic captions with hashtags, links, and mentions.
+
 ## [1.0.0] - 2026-10-19
 
 ### Added
@@ -22,5 +39,6 @@ Changes that rename or remove fields in `feed.json` or `feed.config.json`, or at
 - Configuration and feed validation, an end-to-end test against a mock Instagram API, and continuous integration.
 - Setup guides for GitHub, Instagram, and websites, plus configuration and troubleshooting references.
 
-[Unreleased]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/yon-tyzes/webflow-instagram-feed/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/yon-tyzes/webflow-instagram-feed/releases/tag/v1.0.0
